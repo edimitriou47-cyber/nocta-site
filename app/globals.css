@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; background: #000; }
+body { background: #000; color: #E8ECF4; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+::selection { background: #8FA8FF; color: #000; }
+:focus-visible { outline: 2px solid #8FA8FF; outline-offset: 3px; }
+
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.4s .2s cubic-bezier(.6,0,.2,1) forwards; }
+.draw-late { animation-delay: 1.1s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.star { opacity: 0; transform-box: fill-box; transform-origin: center; animation: star 1s 2.2s ease forwards, twinkle 4s 3.2s ease-in-out infinite; }
+@keyframes star { from { opacity: 0; transform: scale(.2) rotate(-45deg); } to { opacity: 1; transform: none; } }
+@keyframes twinkle { 50% { opacity: .55; } }
+.halo { animation: halo 7s ease-in-out infinite; }
+@keyframes halo { 50% { opacity: .55; } }
+.mask { display: block; overflow: hidden; padding-bottom: .08em; }
+.mask > span { display: block; transform: translateY(105%); animation: rise 1.1s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes rise { to { transform: none; } }
+.fade-in { opacity: 0; animation: fade 1s 1.3s ease forwards; }
+@keyframes fade { to { opacity: 1; } }
+
+@supports (animation-timeline: view()) {
+  .rv { animation: rv linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+  @keyframes rv { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+}
+.price-row { transition: background .4s; }
+.price-row:hover { background: rgba(143,168,255,.06); }
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+.plus { transition: transform .3s; }
+details[open] .plus { transform: rotate(45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .mask > span, .fade-in, .star { opacity: 1; transform: none; }
+  .draw { stroke-dashoffset: 0; }
+}
