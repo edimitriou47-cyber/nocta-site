@@ -8,6 +8,21 @@ const btn = "h-14 px-8 text-sm font-medium tracking-[0.2em] transition-colors";
 const wrap = "mx-auto max-w-7xl px-5 md:px-10";
 const sec = "py-24 md:py-36";
 
+const PROJECTS = [
+  {
+    title: "NLS",
+    category: "Music label website",
+    note: "A bold, dark website for a Greek music label and artist family: artists, releases, team and a membership form.",
+    url: "https://nls-theta.vercel.app/",
+  },
+  {
+    title: "STRAHL",
+    category: "Automotive brand website",
+    note: "A premium brand website for an automotive concept: The Ultimate Driving Experience.",
+    url: "https://strahl-automotive-website.vercel.app/",
+  },
+];
+
 function Frame({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <figure className="rv">
@@ -71,9 +86,31 @@ export default function Page() {
 
         <section id="work" className={`${sec} border-t border-line`}>
           <div className={wrap}>
-            <h2 className="rv font-display text-3xl md:text-5xl">Selected work: what we build</h2>
-            <p className="rv mt-5 max-w-xl text-lg text-dim">Four layouts that show the kinds of websites Nocta Studios designs. These are studio concepts, not client projects.</p>
-            <div className="mt-14 grid gap-8 sm:grid-cols-2">
+            <h2 className="rv font-display text-3xl md:text-5xl">Selected work</h2>
+            <p className="rv mt-5 max-w-xl text-lg text-dim">Live websites designed and built by Nocta Studios, plus concept layouts that show the kinds of sites we create.</p>
+
+            <h3 className="rv mt-14 text-sm tracking-[0.2em] text-dim">LIVE PROJECTS</h3>
+            <div className="mt-6 grid gap-8 sm:grid-cols-2">
+              {PROJECTS.map((p) => (
+                <a
+                  key={p.title}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rv group flex min-h-64 flex-col justify-between border border-line p-8 transition-colors hover:border-ice"
+                >
+                  <div>
+                    <p className="text-sm text-dim">{p.category}</p>
+                    <h4 className="mt-3 font-display text-3xl md:text-4xl">{p.title}</h4>
+                    <p className="mt-4 leading-relaxed text-dim">{p.note}</p>
+                  </div>
+                  <p className="mt-8 text-xs font-medium tracking-[0.2em] transition-colors group-hover:text-glow">VISIT SITE →</p>
+                </a>
+              ))}
+            </div>
+
+            <h3 className="rv mt-20 text-sm tracking-[0.2em] text-dim">CONCEPT LAYOUTS</h3>
+            <div className="mt-6 grid gap-8 sm:grid-cols-2">
               <Frame title="Business website"><div className="flex h-full flex-col gap-3"><div className={`h-1/2 ${b} relative`}><span className="absolute bottom-3 left-3 h-3 w-1/2 bg-ice/40" /></div><div className="grid flex-1 grid-cols-3 gap-3"><div className={b} /><div className={b} /><div className={b} /></div></div></Frame>
               <Frame title="Portfolio"><div className="grid h-full grid-cols-[1fr_2fr] gap-3"><div className="flex flex-col justify-end gap-2"><span className="h-3 w-3/4 bg-ice/40" /><span className={`h-2 w-full ${b}`} /></div><div className="grid grid-cols-2 gap-3"><div className={b} /><div className={`${b} translate-y-4`} /><div className={`${b} -translate-y-0`} /><div className={`${b} translate-y-4`} /></div></div></Frame>
               <Frame title="Landing page"><div className="flex h-full flex-col items-center justify-center gap-3 text-center"><span className="h-4 w-2/3 bg-ice/40" /><span className={`h-2 w-1/2 ${b}`} /><span className="mt-2 h-7 w-24 bg-glow/60" /></div></Frame>
