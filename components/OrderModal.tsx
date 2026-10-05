@@ -18,7 +18,7 @@ function L({ t, children }: { t: string; children: React.ReactNode }) {
 export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: () => void }) {
   const [step, setStep] = useState(pkg ? 0 : 0);
   const [err, setErr] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "payment" | "done" | "error">("idle");
   const [orderNo, setOrderNo] = useState("");
   const lock = useRef(false);
   const idem = useRef(typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
