@@ -99,6 +99,7 @@ export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: ()
   className="mt-4 inline-flex items-center justify-center border border-line px-8 py-4 text-xs tracking-[0.3em] text-dim transition hover:border-glow hover:text-glow"
 >
   DISCUSS A BETTER PRICE
+</a>
 <details className="mx-auto mt-8 max-w-md border border-line text-left">
   <summary className="cursor-pointer px-6 py-5 text-xs tracking-[0.3em] text-dim transition hover:text-glow">
     BANK TRANSFER
