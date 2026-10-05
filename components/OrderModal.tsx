@@ -94,6 +94,12 @@ export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: ()
 >
   PAY WITH PAYPAL
 </a>
+                <a
+  href={`mailto:${CONTACT.email}?subject=Better price for order ${orderNo}`}
+  className="mt-4 inline-flex items-center justify-center border border-line px-8 py-4 text-xs tracking-[0.3em] text-dim transition hover:border-glow hover:text-glow"
+>
+  DISCUSS A BETTER PRICE
+</a>
                 <p className="mt-2 select-all font-display text-xl tracking-widest md:text-2xl">{orderNo}</p>
               </div>
               <p className="mx-auto mt-8 max-w-md leading-relaxed text-dim">{f.pkg} ({price}). We will contact you at {f.email} to confirm the details and next steps. Keep your order number for reference.</p>
