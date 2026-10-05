@@ -123,7 +123,6 @@ export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: ()
     Please include your order number as the payment reference.
   </p>
 </div>
-
                 <p className="mt-2 select-all font-display text-xl tracking-widest md:text-2xl">{orderNo}</p>
               </div>
               <p className="mx-auto mt-8 max-w-md leading-relaxed text-dim">{f.pkg} ({price}). We will contact you at {f.email} to confirm the details and next steps. Keep your order number for reference.</p>
