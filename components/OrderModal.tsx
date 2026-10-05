@@ -92,7 +92,96 @@ export default function OrderModal({
     timeline: "",
     hp: "",
   });
+  useEffect(() => {
+    if (status !== "payment") return;
+    if (!["1 Page", "2 Pages", "3 Pages", "4 Pages"].includes(pkg ?? "")) return;
 
+    const loadPayPal = async () => {
+      const response = await fetch("/api/paypal/client-id");
+      const data = await response.json();
+
+      if (!response.ok || !data.clientId) {
+        setErr("PayPal could not be loaded.");
+        return;
+      }
+
+      const existingScript = document.getElementById("paypal-sdk");
+
+      const renderButtons = () => {
+        const container = document.getElementById("paypal-button-container");
+        const paypal = (window as any).paypal;
+
+        if (!container || !paypal) return;
+
+        container.innerHTML = "";
+
+        paypal
+          .Buttons({
+            createOrder: async () => {
+              const response = await fetch("/api/paypal/create-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ packageId: pkg }),
+              });
+
+              const data = await response.json();
+
+              if (!response.ok || !data.orderID) {
+                throw new Error(data.error || "Could not create PayPal order.");
+              }
+
+              return data.orderID;
+            },
+
+            onApprove: async (data: any) => {
+              const response = await fetch("/api/paypal/capture-order", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderID: data.orderID }),
+              });
+
+              const result = await response.json();
+
+              if (!response.ok || !result.success) {
+                throw new Error(
+                  result.error || "Could not complete PayPal payment."
+                );
+              }
+
+              setStatus("done");
+            },
+
+            onError: (error: any) => {
+              console.error("PayPal error:", error);
+              setErr("PayPal payment could not be completed.");
+            },
+          })
+          .render("#paypal-button-container");
+      };
+
+      if (existingScript) {
+        if ((window as any).paypal) {
+          renderButtons();
+        } else {
+          existingScript.addEventListener("load", renderButtons, {
+            once: true,
+          });
+        }
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.id = "paypal-sdk";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(
+        data.clientId
+      )}&currency=EUR&components=buttons`;
+      script.async = true;
+      script.onload = renderButtons;
+      document.body.appendChild(script);
+    };
+
+    loadPayPal();
+  }, [status, pkg]);
   const body = useRef<HTMLDivElement>(null);
 
   const set = <K extends keyof F>(k: K, v: F[K]) =>
@@ -287,7 +376,12 @@ export default function OrderModal({
                   className="mt-8 inline-flex items-center justify-center border border-glow bg-glow/10 px-8 py-4 text-xs tracking-[0.3em] text-glow transition hover:bg-glow/20"
                 >
                   PAY WITH PAYPAL
-                </a>
+                <div
+  id="paypal-button-container"
+  className="mt-8 min-h-[50px] w-full"
+  data-package={pkg}
+  data-order={orderNo}
+/>
 
                 <a
                   href={`mailto:${CONTACT.email}?subject=Better price for order ${orderNo}`}
