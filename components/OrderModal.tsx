@@ -59,7 +59,7 @@ export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: ()
       if (!r.ok || !j?.success || !j?.orderId) throw new Error("not submitted");
       const wait = 1400 - (Date.now() - t0);
       if (wait > 0) await new Promise((res) => setTimeout(res, wait));
-      setOrderNo(j.orderId); setStatus("done");
+     setOrderNo(j.orderId); setStatus("payment");
     } catch { lock.current = false; setStatus("error"); }
   };
 
