@@ -86,6 +86,14 @@ export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: ()
               <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed text-dim">Your order has been received successfully.</p>
               <div className="mx-auto mt-10 max-w-sm border border-glow/60 px-6 py-5 shadow-[0_0_40px_rgba(143,168,255,0.18)]">
                 <p className="text-xs tracking-[0.3em] text-dim">ORDER NUMBER</p>
+                <a
+  href="https://www.paypal.me/EktorasDimitriou147"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mt-8 inline-flex items-center justify-center border border-glow bg-glow/10 px-8 py-4 text-xs tracking-[0.3em] text-glow transition hover:bg-glow/20"
+>
+  PAY WITH PAYPAL
+</a>
                 <p className="mt-2 select-all font-display text-xl tracking-widest md:text-2xl">{orderNo}</p>
               </div>
               <p className="mx-auto mt-8 max-w-md leading-relaxed text-dim">{f.pkg} ({price}). We will contact you at {f.email} to confirm the details and next steps. Keep your order number for reference.</p>
