@@ -369,20 +369,12 @@ export default function OrderModal({
                   {orderNo}
                 </p>
 
-                <a
-                  href="https://www.paypal.me/EktorasDimitriou147"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 inline-flex items-center justify-center border border-glow bg-glow/10 px-8 py-4 text-xs tracking-[0.3em] text-glow transition hover:bg-glow/20"
-                >
-                  PAY WITH PAYPAL
-                <div
+             <div
   id="paypal-button-container"
   className="mt-8 min-h-[50px] w-full"
   data-package={pkg}
   data-order={orderNo}
 />
-
                 <a
                   href={`mailto:${CONTACT.email}?subject=Better price for order ${orderNo}`}
                   className="mt-4 inline-flex items-center justify-center border border-line px-8 py-4 text-xs tracking-[0.3em] text-dim transition hover:border-glow hover:text-glow"
