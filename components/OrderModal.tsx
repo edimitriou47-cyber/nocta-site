@@ -78,7 +78,7 @@ export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: ()
       {status !== "done" && <div className="h-px shrink-0 bg-line"><div className="h-px bg-glow transition-all duration-500" style={{ width: `${((step + 1) / STEPS.length) * 100}%` }} /></div>}
       <div ref={body} className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-2xl px-5 py-10 md:py-16">
-          {status === "done" ? (
+         {status === "payment" ? (
             <div className="fade-in text-center" style={{ animationDelay: "0s", animationDuration: ".8s" }}>
               <div className="mx-auto h-40 w-40 md:h-52 md:w-52"><Mark /></div>
               <p className="mt-6 text-xs tracking-[0.4em] text-glow">ORDER CONFIRMED</p>
