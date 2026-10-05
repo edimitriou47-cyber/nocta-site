@@ -99,13 +99,25 @@ export default function OrderModal({ pkg, onClose }: { pkg?: string; onClose: ()
   className="mt-4 inline-flex items-center justify-center border border-line px-8 py-4 text-xs tracking-[0.3em] text-dim transition hover:border-glow hover:text-glow"
 >
   DISCUSS A BETTER PRICE
-                  <div className="mx-auto mt-8 max-w-md border border-line px-6 py-5 text-left">
-  <p className="text-xs tracking-[0.3em] text-dim">BANK TRANSFER</p>
+<details className="mx-auto mt-8 max-w-md border border-line text-left">
+  <summary className="cursor-pointer px-6 py-5 text-xs tracking-[0.3em] text-dim transition hover:text-glow">
+    BANK TRANSFER
+  </summary>
 
-  <div className="mt-4 space-y-2 text-sm text-dim">
-    <p>IBAN: LT19 325 0890 2846 1933</p>
-    <p>Account holder: Nocta Studios</p>
+  <div className="border-t border-line px-6 py-5">
+    <p className="text-sm text-dim">
+      IBAN: LT19 3250 0890 2846 1933
+    </p>
+
+    <p className="mt-2 text-sm text-dim">
+      Account holder: Nocta Studios
+    </p>
+
+    <p className="mt-4 text-xs leading-relaxed text-dim">
+      Please include your order number as the payment reference.
+    </p>
   </div>
+</details>
 
   <p className="mt-4 text-xs leading-relaxed text-dim">
     Please include your order number as the payment reference.
